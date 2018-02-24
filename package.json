@@ -1,7 +1,7 @@
 {
   "name": "keyboard-tracker",
-  "version": "1.0.0",
-  "description": "A keyboard event tracker",
+  "version": "1.0.1",
+  "description": "Zero config keyboard tracker for JS.",
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
