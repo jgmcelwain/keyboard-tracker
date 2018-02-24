@@ -1,16 +1,23 @@
 class KeyboardTracker {
   constructor (options = { persistence: false }) {
-    this.keys = options.persitence === true && JSON.parse(localStorage.getItem('keyboard-tracker')) || {}
     this.persistence = options.persistence
+
+    this.keys = {}
+
+    if (this.persistence === true) {
+      this.keys = this.loadState() || {}
+    }
 
     window.addEventListener('keydown', (e) => this.logEvent(e, true))
     window.addEventListener('keyup', (e) => this.logEvent(e, false))
   }
 
-  persistState () {
-    if (this.persistence === true) {
-      localStorage.setItem('keyboard-tracker', JSON.stringify(this.keys))
-    }
+  saveState () {
+    localStorage.setItem('keyboard-tracker', JSON.stringify(this.keys))
+  }
+
+  loadState () {
+    return JSON.parse(localStorage.getItem('keyboard-tracker'))
   }
 	
   key (key) {
@@ -37,7 +44,7 @@ class KeyboardTracker {
       this.keys[key].pressCount++
       this.keys[key].lastPressed = timestamp
     }
-    
+
     this.keys[key].history.push({
       state: pressed === true ? 'down' : 'up',
       timestamp
@@ -55,7 +62,11 @@ class KeyboardTracker {
     
     if (this.key(key).pressed !== pressed) {
       this.saveKeyPress(key, pressed)
-      this.persistState()
+
+
+      if (this.persistence === true) {
+        this.saveState()
+      }
     }
   }
 }
