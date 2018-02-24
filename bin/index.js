@@ -30,28 +30,37 @@ class KeyboardTracker {
     this.keys[key] = {
       pressed: null,
       pressCount: 0,
-      lastPressed: Date.now()
+      lastPressed: Date.now(),
+      history: []
     }
   }
 
   saveKeyPress (key, pressed) {
-	if (pressed === true && this.keys[key].pressed !== true) {
+    const timestamp = Date.now()
+    
+    if (pressed === true && this.keys[key].pressed !== true) {
       this.keys[key].pressCount++
-      this.keys[key].lastPressed = Date.now()
-	}
+      this.keys[key].lastPressed = timestamp
+    }
+    
+    if (pressed !== this.keys[key].pressed) {
+      this.keys[key].history.push({
+        state: pressed === true ? 'down' : 'up',
+        timestamp
+      })
+    }
 	  
     this.keys[key].pressed = pressed
   }
 
   logEvent (e, pressed) {
-	const { key } = e
-	
-    if (!this.keyExists(key)) {
-		this.createKey(key)
-	}
+    const { key } = e
     
-	this.saveKeyPress(key, pressed)
-
+    if (!this.keyExists(key)) {
+      this.createKey(key)
+    }
+      
+    this.saveKeyPress(key, pressed)
     this.persistState()
   }
 }
