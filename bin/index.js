@@ -1,7 +1,8 @@
 class KeyboardTracker {
-  constructor (options = { persistence: false, history: false }) {
+  constructor (options = { persistence: false, history: false, handler: null }) {
     this.persistence = options.persistence
     this.history = options.history
+    this.handler = options.handler
 
     this.keys = {}
 
@@ -70,6 +71,10 @@ class KeyboardTracker {
       if (this.persistence === true) {
         this.saveState()
       }
+    }
+
+    if (this.handler !== null) {
+      this.handler(this.key(key))
     }
   }
 }
