@@ -1,8 +1,8 @@
 class KeyboardTracker {
   constructor (options = { persistence: false, history: false, handler: null }) {
-    this.persistence = options.persistence
-    this.history = options.history
-    this.handler = options.handler
+    for (let key of Object.keys(options)) {
+      this[key] = options[key]
+    }
 
     this.keys = {}
 
