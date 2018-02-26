@@ -1,6 +1,6 @@
 {
   "name": "keyboard-tracker",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Zero config keyboard tracker for JS.",
   "main": "bin/index.js",
   "scripts": {
