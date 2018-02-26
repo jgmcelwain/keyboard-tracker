@@ -1,6 +1,7 @@
 class KeyboardTracker {
-  constructor (options = { persistence: false }) {
+  constructor (options = { persistence: false, history: false }) {
     this.persistence = options.persistence
+    this.history = options.history
 
     this.keys = {}
 
@@ -45,10 +46,12 @@ class KeyboardTracker {
       this.keys[key].lastPressed = timestamp
     }
 
-    this.keys[key].history.push({
-      state: pressed === true ? 'down' : 'up',
-      timestamp
-    })
+    if (this.history === true) {
+      this.keys[key].history.push({
+        state: pressed === true ? 'down' : 'up',
+        timestamp
+      })
+    }
 	  
     this.keys[key].pressed = pressed
   }
