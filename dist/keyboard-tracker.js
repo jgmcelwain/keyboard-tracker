@@ -8,9 +8,12 @@ var KeyboardTracker = function () {
   function KeyboardTracker() {
     var _this = this;
 
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { persistence: false, history: false, handler: null };
+    var handler = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { persistence: false, history: false };
 
     _classCallCheck(this, KeyboardTracker);
+
+    this.handler = handler;
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -77,8 +80,8 @@ var KeyboardTracker = function () {
       this.keys[key] = {
         key: key,
         pressed: null,
-        pressCount: 0,
-        lastPressed: Date.now(),
+        total: 0,
+        latest: Date.now(),
         history: []
       };
     }
@@ -87,9 +90,9 @@ var KeyboardTracker = function () {
     value: function saveKeyPress(key, pressed) {
       var timestamp = Date.now();
 
-      if (pressed === true && this.keys[key].pressed !== true) {
-        this.keys[key].pressCount++;
-        this.keys[key].lastPressed = timestamp;
+      if (pressed === true) {
+        this.keys[key].total++;
+        this.keys[key].latest = timestamp;
       }
 
       if (this.history === true) {
