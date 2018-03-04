@@ -1,4 +1,4 @@
-class KeyboardTracker {
+export default class KeyboardTracker {
   constructor (options = { persistence: false, history: false, handler: null }) {
     for (let key of Object.keys(options)) {
       this[key] = options[key]
@@ -10,8 +10,8 @@ class KeyboardTracker {
       this.keys = this.loadState() || {}
     }
 
-    window.addEventListener('keydown', (e) => this.logEvent(e, true))
-    window.addEventListener('keyup', (e) => this.logEvent(e, false))
+    window.addEventListener('keydown', e => this.logEvent(e, true))
+    window.addEventListener('keyup', e => this.logEvent(e, false))
   }
 
   saveState () {
@@ -48,10 +48,9 @@ class KeyboardTracker {
     }
 
     if (this.history === true) {
-      this.keys[key].history.push({
-        state: pressed === true ? 'down' : 'up',
-        timestamp
-      })
+      const state = (pressed === true ? 'down' : 'up')
+      
+      this.keys[key].history.push({ state, timestamp })
     }
 	  
     this.keys[key].pressed = pressed
@@ -78,5 +77,3 @@ class KeyboardTracker {
     }
   }
 }
-
-export default KeyboardTracker
