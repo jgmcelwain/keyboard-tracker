@@ -14,7 +14,9 @@ Simple, zero dependency keyboard tracker for JS.
 
 #### `KeyboardTracker(handler[, options])`
 
- - **`handler`**` <Function>`: Receives one argument which contains the key which was pressed and any data the tracker has captured on that key. Defaults to `null`.
+ - **`handler`**` <Function, Object>`:
+   - **`<Function>`**: Receives one argument which contains the key which was pressed and any data the tracker has captured on that key. Defaults to `null`.
+   - **`<Object>`**: Will execute the function which key matches the key pressed. Can also contain a `default` property with a function to run if no matching key is found. Functions behave identically to the `<Function>` behaviour above.
  - **`options`**` <Object>`:
    - **`persistence`**` <Boolean>`: Set to true to save data between sessions using `localStorage`. Defaults to `false`.
    - **`history`**` <Boolean>`: Set to true to save every event with its timestamp. Defaults to `false`.
@@ -23,7 +25,7 @@ Simple, zero dependency keyboard tracker for JS.
 ### Example
 
 ```js
-const tracker = new KeyboardTracker((e) => console.log(e), { history: true })
+const tracker = new KeyboardTracker({ 'a': (e) => console.log(e), { history: true })
 
 // press 'a' key
 // => { key: 'a', pressed: true, total: 1, latest: 1520181191972, history: [{ state: 'down', timestamp: 1520181191972 }]}
