@@ -1,5 +1,5 @@
 class KeyboardTracker {
-  constructor (handler = null, options = { persistence: false, history: false }) {
+  constructor (handler = null, options = { persistence: false, history: false, scope: window }) {
     this.handler = handler
   
     for (let key of Object.keys(options)) {
@@ -12,8 +12,8 @@ class KeyboardTracker {
       this.keys = this.loadState() || {}
     }
 
-    window.addEventListener('keydown', e => this.logEvent(e, true))
-    window.addEventListener('keyup', e => this.logEvent(e, false))
+    this.scope.addEventListener('keydown', e => this.logEvent(e, true))
+    this.scope.addEventListener('keyup', e => this.logEvent(e, false))
   }
 
   saveState () {
