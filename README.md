@@ -28,5 +28,5 @@ Simple, zero dependency keyboard tracker for JS.
 const tracker = new KeyboardTracker({ 'a': (e) => console.log(e), { history: true })
 
 // press 'a' key
-// => { key: 'a', pressed: true, total: 1, latest: 1520181191972, history: [{ state: 'down', timestamp: 1520181191972 }]}
+// => { key: 'a', pressed: true, total: 1, latest: 1520181191972, history: [{ state: 'down', timestamp: 1520181191972 }] }
 ```
