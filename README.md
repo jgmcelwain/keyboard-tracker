@@ -11,8 +11,6 @@ Zero dependency, zero config keyboard tracker for JS.
 ```
 
 ```js
-import KeyboardTracker from 'keyboard-tracker'
-
 const tracker = new KeyboardTracker({ handler: e => console.log(e) })
 
 // press 'a' key
@@ -23,4 +21,4 @@ const tracker = new KeyboardTracker({ handler: e => console.log(e) })
 
  - `persistence` - defaults to `false`. Set to `true` to enable persitence between sessions.
  - `history` - defaults to `false`. Set to `true` to enable saving of each keypress timestamp.
- - `handler` - defaults to `null`. If set to a function said function will be run on every event, passing the key in question as a parameter
+ - `handler` - defaults to `null`. If set to a function said function will be run on every event, passing the pressed key's data as a parameter
