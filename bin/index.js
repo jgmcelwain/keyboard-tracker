@@ -75,7 +75,15 @@ class KeyboardTracker {
       }
 
       if (this.handler !== null) {
-        this.handler(this.key(key))
+        if (typeof this.handler === 'function') {
+          this.handler(this.key(key))
+        }
+        else if (this.handler[key] !== undefined) {
+          this.handler[key](this.key(key))
+        }
+        else if (this.handler.default !== undefined) {
+          this.handler.default(this.key(key))
+        }
       }
     }
   }
