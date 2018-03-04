@@ -2,13 +2,13 @@ class KeyboardTracker {
   constructor (handler, options) {	
     this.handler = handler || null
 	
-	  const defaults = { persistence: false, history: false, scope: window }
+    const defaults = { persistence: false, history: false, scope: window }
     options = { ...defaults, ...options }
-  
+
     for (let key of Object.keys(options)) {
       this[key] = options[key]
     }
-    
+
     this.keys = {}
 
     if (this.persistence === true) {
@@ -30,7 +30,7 @@ class KeyboardTracker {
   key (key) {
     return this.keys[key] || null
   }
-  
+
   keyExists (key) {
     return this.key(key) !== null
   }
@@ -63,20 +63,20 @@ class KeyboardTracker {
         entry.state = 'up'
         entry.duration = timestamp - this.key(key).history[this.key(key).history.length - 1].timestamp
       }
-      
+
       this.keys[key].history.push(entry)
     }
-	  
+
     this.keys[key].pressed = pressed
   }
 
   logEvent (e, pressed) {
     const { key } = e
-    
+
     if (!this.keyExists(key)) {
       this.createKey(key)
     }
-    
+
     if (this.key(key).pressed !== pressed) {
       this.saveKeyPress(key, pressed)
 
