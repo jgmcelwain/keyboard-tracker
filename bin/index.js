@@ -71,10 +71,10 @@ export default class KeyboardTracker {
       if (this.persistence === true) {
         this.saveState()
       }
-    }
 
-    if (this.handler !== null) {
-      this.handler(this.key(key))
+      if (this.handler !== null) {
+        this.handler(this.key(key))
+      }
     }
   }
 }
