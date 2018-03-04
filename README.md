@@ -1,24 +1,29 @@
 ## Keyboard Tracker
 [![npm](https://img.shields.io/npm/v/keyboard-tracker.svg)](https://www.npmjs.com/package/keyboard-tracker)
 
-Zero dependency, zero config keyboard tracker for JS.
+Simple, zero dependency keyboard tracker for JS.
 
 
-### Usage:
+### Installation:
 
 ``` html
 <script type="text/javascript" src="https://unpkg.com/keyboard-tracker"></script>
 ```
 
+### Usage
+
+#### `KeyboardTracker(handler[, options])`
+
+ - **`handler`**` <Function>`: Receives one argument which contains the key which was pressed and any data the tracker has captured on that key. Defaults to `null`.
+ - **`options`**` <Object>`:
+   - **`persistence`**` <Boolean>`: Set to true to save data between sessions using `localStorage`. Defaults to `false`.
+   - **`history`**` <Boolean>`: Set to true to save every event with its timestamp. Defaults to `false`.
+   
+### Example
+
 ```js
-const tracker = new KeyboardTracker({ handler: e => console.log(e) })
+const tracker = new KeyboardTracker((e) => console.log(e), { history: true })
 
 // press 'a' key
-// => { key: 'a', isPressed: true, pressCount: 1, lastPressed: 1519494954553, history: [] }
+// => { key: 'a', pressed: true, total: 1, latest: 1520181191972, history: [{ state: 'down', timestamp: 1520181191972 }]}
 ```
-
-### Options/Defaults:
-
- - `persistence` - defaults to `false`. Set to `true` to enable persitence between sessions.
- - `history` - defaults to `false`. Set to `true` to enable saving of each keypress timestamp.
- - `handler` - defaults to `null`. If set to a function said function will be run on every event, passing the pressed key's data as a parameter
