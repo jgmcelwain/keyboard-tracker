@@ -1,19 +1,21 @@
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var KeyboardTracker = function () {
-  function KeyboardTracker() {
+  function KeyboardTracker(handler, options) {
     var _this = this;
-
-    var handler = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { persistence: false, history: false, scope: window };
 
     _classCallCheck(this, KeyboardTracker);
 
-    this.handler = handler;
+    this.handler = handler || null;
+
+    var defaults = { persistence: false, history: false, scope: window };
+    options = _extends({}, defaults, options);
 
     var _iteratorNormalCompletion = true;
     var _didIteratorError = false;
@@ -96,9 +98,16 @@ var KeyboardTracker = function () {
       }
 
       if (this.history === true) {
-        var state = pressed === true ? 'down' : 'up';
+        var entry = { timestamp: timestamp };
 
-        this.keys[key].history.push({ state: state, timestamp: timestamp });
+        if (pressed === true) {
+          entry.state = 'down';
+        } else {
+          entry.state = 'up';
+          entry.duration = timestamp - this.key(key).history[this.key(key).history.length - 1].timestamp;
+        }
+
+        this.keys[key].history.push(entry);
       }
 
       this.keys[key].pressed = pressed;
