@@ -1,4 +1,4 @@
-export default class KeyboardTracker {
+class KeyboardTracker {
   constructor (options = { persistence: false, history: false, handler: null }) {
     for (let key of Object.keys(options)) {
       this[key] = options[key]
