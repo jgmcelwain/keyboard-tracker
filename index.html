@@ -38,10 +38,10 @@
     <div class="block__title">Usage</div>
     <div class="block__content">
       <div class="content__code">
-        <pre><code class="language-javascript">const tracker = new KeyboardTracker({ handler: e => console.log(e) })
+        <pre><code class="language-javascript">const tracker = new KeyboardTracker((e) => console.log(e), { history: true })
 
 // press 'a' key
-// => { key: 'a', isPressed: true, pressCount: 1, lastPressed: 1519494954553, history: [] }</code></pre>
+// => { key: 'a', pressed: true, total: 1, latest: 1520181191972, history: [{ state: 'down', timestamp: 1520181191972 }]}</code></pre>
       </div>
     </div>
   </div>
