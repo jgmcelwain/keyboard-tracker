@@ -6,14 +6,16 @@ const babel = require('gulp-babel')
 gulp.task('default', () => {
   gulp.src('bin/index.js')
     .pipe(babel({
-      presets: ['env']
+      presets: ['es2015'],
+      plugins: ['transform-object-rest-spread']
     }))
     .pipe(rename('keyboard-tracker.js'))
     .pipe(gulp.dest('dist'))
 
   gulp.src('bin/index.js')
     .pipe(babel({
-      presets: ['env']
+      presets: ['es2015'],
+      plugins: ['transform-object-rest-spread']
     }))
     .pipe(uglify())
     .pipe(rename('keyboard-tracker.min.js'))

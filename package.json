@@ -1,6 +1,6 @@
 {
   "name": "keyboard-tracker",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "description": "Zero config keyboard tracker for JS.",
   "main": "bin/index.js",
   "scripts": {
@@ -22,7 +22,8 @@
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "eslint": "^4.18.1",
     "gulp-babel": "^7.0.1",
     "gulp-rename": "^1.2.2",
