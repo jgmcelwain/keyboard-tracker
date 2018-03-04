@@ -54,9 +54,17 @@ class KeyboardTracker {
     }
 
     if (this.history === true) {
-      const state = (pressed === true ? 'down' : 'up')
+      const entry = { timestamp }
+
+      if (pressed === true) {
+        entry.state = 'down'
+      }
+      else {
+        entry.state = 'up'
+        entry.duration = timestamp - this.key(key).history[this.key(key).history.length - 1].timestamp
+      }
       
-      this.keys[key].history.push({ state, timestamp })
+      this.keys[key].history.push(entry)
     }
 	  
     this.keys[key].pressed = pressed
