@@ -32,6 +32,7 @@ export default class KeyboardTracker {
 
   createKey (key, pressed) {
     this.keys[key] = {
+      key,
       pressed: null,
       pressCount: 0,
       lastPressed: Date.now(),
