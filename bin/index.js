@@ -1,6 +1,9 @@
 class KeyboardTracker {
-  constructor (handler = null, options = { persistence: false, history: false, scope: window }) {
-    this.handler = handler
+  constructor (handler, options) {	
+    this.handler = handler || null
+	
+	  const defaults = { persistence: false, history: false, scope: window }
+    options = { ...defaults, ...options }
   
     for (let key of Object.keys(options)) {
       this[key] = options[key]
