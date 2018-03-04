@@ -12,7 +12,7 @@ Simple, zero dependency keyboard tracker for JS.
 
 ### Usage
 
-#### `KeyboardTracker(handler[, options])`
+#### `new KeyboardTracker(handler[, options])`
 
  - **`handler`**` <Function, Object>`:
    - **`<Function>`**: Receives one argument which contains the key which was pressed and any data the tracker has captured on that key.
