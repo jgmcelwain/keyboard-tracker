@@ -18,6 +18,7 @@ Simple, zero dependency keyboard tracker for JS.
  - **`options`**` <Object>`:
    - **`persistence`**` <Boolean>`: Set to true to save data between sessions using `localStorage`. Defaults to `false`.
    - **`history`**` <Boolean>`: Set to true to save every event with its timestamp. Defaults to `false`.
+   - **`scope`**` <Element>`: The element to attach the event listeners to. Defaults to `window`.
    
 ### Example
 
