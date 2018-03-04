@@ -6,8 +6,8 @@ Zero dependency, zero config keyboard tracker for JS.
 
 ### Usage:
 
-``` bash
-$ npm install keyboard-tracker
+``` html
+<script type="text/javascript" src="https://unpkg.com/keyboard-tracker"></script>
 ```
 
 ```js
