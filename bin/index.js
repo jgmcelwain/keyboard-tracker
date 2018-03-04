@@ -1,16 +1,11 @@
 class KeyboardTracker {
-  constructor (options = { persistence: false, history: false }, handler = null) {
-    if (typeof options === "function") {
-      this.handler = options
+  constructor (handler = null, options = { persistence: false, history: false }) {
+    this.handler = handler
+  
+    for (let key of Object.keys(options)) {
+      this[key] = options[key]
     }
-    else {
-	    this.handler = handler
-	  
-      for (let key of Object.keys(options)) {
-        this[key] = options[key]
-      }
-    }
-
+    
     this.keys = {}
 
     if (this.persistence === true) {
@@ -41,8 +36,8 @@ class KeyboardTracker {
     this.keys[key] = {
       key,
       pressed: null,
-      pressCount: 0,
-      lastPressed: Date.now(),
+      total: 0,
+      latest: Date.now(),
       history: []
     }
   }
@@ -51,8 +46,8 @@ class KeyboardTracker {
     const timestamp = Date.now()
 
     if (pressed === true) {
-      this.keys[key].pressCount++
-      this.keys[key].lastPressed = timestamp
+      this.keys[key].total++
+      this.keys[key].latest = timestamp
     }
 
     if (this.history === true) {
