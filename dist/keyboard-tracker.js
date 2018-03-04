@@ -9,7 +9,7 @@ var KeyboardTracker = function () {
     var _this = this;
 
     var handler = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { persistence: false, history: false };
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { persistence: false, history: false, scope: window };
 
     _classCallCheck(this, KeyboardTracker);
 
@@ -46,10 +46,10 @@ var KeyboardTracker = function () {
       this.keys = this.loadState() || {};
     }
 
-    window.addEventListener('keydown', function (e) {
+    this.scope.addEventListener('keydown', function (e) {
       return _this.logEvent(e, true);
     });
-    window.addEventListener('keyup', function (e) {
+    this.scope.addEventListener('keyup', function (e) {
       return _this.logEvent(e, false);
     });
   }
